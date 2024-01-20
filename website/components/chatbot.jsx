@@ -42,8 +42,14 @@ const Chatbot = () => {
   return (
     <>
       <div className="flex flex-col h-screen p-10">
-        <div className="flex flex-col grid grid-rows-10 grid-flow-col flex-grow overflow-y-auto p-8 bg-gray-200 rounded-2xl ">
-          <div className="justify-center items-center row-span-10">
+        <div
+          className={
+            count === -1
+              ? "flex-grow overflow-y-auto bg-gray-200 rounded-xl p-8 flex items-center justify-center"
+              : "flex-grow overflow-y-auto bg-gray-200 rounded-xl p-8"
+          }
+        >
+          <div className="">
             {count === -1 && (
               <div className="flex items-center justify-center grid grid-rows-2 grid-flow-col">
                 <h1 className="text-3xl font-bold text-white-800 row-span-1 text-center">
@@ -100,22 +106,21 @@ const Chatbot = () => {
               </div>
             ))}
           </div>
-
-          <div className="mt-4 absolute bottom-0 w-5/6 flex items-center justify-center p-2">
-            <input
-              type="text"
-              value={newMessage}
-              onChange={(e) => setNewMessage(e.target.value)}
-              className="flex-grow p-2 border bg-transparent border-gray-800 rounded-md focus:outline-none"
-              placeholder="Ask AI"
-            />
-            <button
-              onClick={handleSendMessage}
-              className="ml-2 p-2 bg-transparent hover:bg-gray-800 text-gray-800 font-semibold hover:text-white py-2 px-4 border border-gray-800 hover:border-transparent rounded"
-            >
-              Send
-            </button>
-          </div>
+        </div>
+        <div className="mt-4 flex items-center justify-center p-2">
+          <input
+            type="text"
+            value={newMessage}
+            onChange={(e) => setNewMessage(e.target.value)}
+            className="flex-grow p-2 border bg-transparent border-gray-800 rounded-md focus:outline-none"
+            placeholder="Ask AI"
+          />
+          <button
+            onClick={handleSendMessage}
+            className="ml-2 p-2 bg-transparent hover:bg-gray-800 text-gray-800 font-semibold hover:text-white py-2 px-4 border border-gray-800 hover:border-transparent rounded"
+          >
+            Send
+          </button>
         </div>
       </div>
     </>
