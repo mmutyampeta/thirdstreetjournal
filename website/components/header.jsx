@@ -15,40 +15,38 @@ function classNames(...classes) {
 
 export default function Header() {
   return (
-    <Disclosure as="nav" className="bg-gray-800">
-      {({ open }) => (
-        <>
-          <header className="bg-gray-800 text-white p-4">
-            <div className="container mx-auto flex items-center justify-center">
-              <h1 className="text-4xl font-bold font-serif">
-                THIRD STREET JOURNAL
-              </h1>
-            </div>
-          </header>
+    <>
+      <div className="bg-gray-800 text-white p-4">
+        <header className="bg-gray-800 text-white p-4">
+          <div className="container mx-auto flex items-center justify-center">
+            <h1 className="text-4xl font-bold font-serif">
+              THIRD STREET JOURNAL
+            </h1>
+          </div>
+        </header>
 
-          <div className="flex items-center justify-center">
-            <div className="hidden sm:ml-6 sm:block">
-              <div className="flex space-x-4">
-                {navigation.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className={classNames(
-                      item.current
-                        ? "bg-gray-900 text-white"
-                        : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                      "rounded-md px-3 py-2 text-sm font-medium"
-                    )}
-                    aria-current={item.current ? "page" : undefined}
-                  >
-                    {item.name}
-                  </a>
-                ))}
-              </div>
+        <div className="flex items-center justify-center">
+          <div className="hidden sm:ml-6 sm:block">
+            <div className="flex space-x-4">
+              {navigation.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className={classNames(
+                    item.current
+                      ? "bg-gray-800 text-white-900"
+                      : "text-gray-400 hover:bg-gray-700 hover:text-white",
+                    "rounded-md px-3 py-2 text-sm font-medium"
+                  )}
+                  aria-current={item.current ? "page" : undefined}
+                >
+                  {item.name}
+                </a>
+              ))}
             </div>
           </div>
-        </>
-      )}
-    </Disclosure>
+        </div>
+      </div>
+    </>
   );
 }
