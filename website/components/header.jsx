@@ -1,10 +1,8 @@
-import { Fragment } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 const navigation = [
-  { name: "Home", href: "#", current: true },
-  { name: "Team", href: "#", current: false },
+  { name: "Home", href: "/", current: true },
+  { name: "Chat Bot", href: "/chat", current: false },
   { name: "Projects", href: "#", current: false },
   { name: "Calendar", href: "#", current: false },
 ];
@@ -13,11 +11,11 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Header() {
+const Header = ({ setSelectedPage }) => {
   return (
     <>
       <div className="bg-gray-800 text-white p-4">
-        <header className="bg-gray-800 text-white p-4">
+        <header className="bg-gray-800 text-white p-4 flex items-center justify-center">
           <div className="container mx-auto flex items-center justify-center">
             <h1 className="text-4xl font-bold font-serif">
               THIRD STREET JOURNAL
@@ -28,8 +26,26 @@ export default function Header() {
         <div className="flex items-center justify-center">
           <div className="hidden sm:ml-6 sm:block">
             <div className="flex space-x-4">
-              {navigation.map((item) => (
-                <a
+              <button
+                onClick={() => {
+                  setSelectedPage("home");
+                }}
+              >
+                Home
+              </button>
+              <button onClick={() => setSelectedPage("chat")}>Chat Bot</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Header;
+
+/*
+<Link
                   key={item.name}
                   href={item.href}
                   className={classNames(
@@ -41,12 +57,5 @@ export default function Header() {
                   aria-current={item.current ? "page" : undefined}
                 >
                   {item.name}
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-}
+                </Link>
+*/
