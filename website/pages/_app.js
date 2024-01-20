@@ -9,7 +9,7 @@ function MyApp() {
   return (
     <>
       <Header setSelectedPage={setSelectedPage} />
-      {selectedPage === "home" && <Intro />}
+      {selectedPage === "home" && <Intro setSelectedPage={setSelectedPage} />}
       {selectedPage === "chat" && <Chatbot />}
     </>
   );

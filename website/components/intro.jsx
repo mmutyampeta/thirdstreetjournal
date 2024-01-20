@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Intro() {
+export default function Intro({ setSelectedPage }) {
   return (
     <>
       <div className="bg-gray-200 text-gray-800 p-8">
@@ -33,7 +33,10 @@ export default function Intro() {
             </p>
           </div>
           <div className="flex items-center justify-center row-span-1">
-            <button className="bg-gray-800 text-gray-200 hover:text-white font-bold py-2 px-4 rounded-full">
+            <button
+              className="bg-gray-800 text-gray-200 hover:text-white font-bold py-2 px-4 rounded-full"
+              onClick={() => setSelectedPage("chat")}
+            >
               <p className="text-2xl text-white-800 font-serif tracking-wider leading-10 p-1">
                 Jump to chat
               </p>
