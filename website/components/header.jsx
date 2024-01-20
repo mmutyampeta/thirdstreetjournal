@@ -2,9 +2,9 @@ import Link from "next/link";
 
 const navigation = [
   { name: "Home", href: "/", current: true },
-  { name: "Chat Bot", href: "/chat", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
+  { name: "Chat Bot", href: "/", current: false },
+  { name: "Projects", href: "/", current: false },
+  { name: "Calendar", href: "/", current: false },
 ];
 
 function classNames(...classes) {
@@ -26,14 +26,14 @@ const Header = ({ setSelectedPage }) => {
         <div className="flex items-center justify-center">
           <div className="hidden sm:ml-6 sm:block">
             <div className="flex space-x-4">
-              <button
+              <button className="font-serif font-bold"
                 onClick={() => {
                   setSelectedPage("home");
                 }}
               >
                 Home
               </button>
-              <button onClick={() => setSelectedPage("chat")}>Chat Bot</button>
+              <button className="font-serif font-bold" onClick={() => setSelectedPage("chat")}>Chat Bot</button>
             </div>
           </div>
         </div>

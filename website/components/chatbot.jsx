@@ -15,6 +15,7 @@ const Chatbot = () => {
       { text: newMessage, user: "user" },
     ]);
 
+    console.log(messages);
     // Simulate bot response (replace with actual bot logic)
     setMessages((prevMessages) => [
       ...prevMessages,
@@ -31,14 +32,12 @@ const Chatbot = () => {
         {messages.map((message, index) => (
           <div
             key={index}
-            className={`flex ${
-              message.user === "user" ? "justify-end" : "justify-start"
-            } mb-2`}
+            className={`flex ${message.user === "user" ? "justify-end" : "justify-start"
+              } mb-2`}
           >
             <span
-              className={`inline-block p-2 max-w-3/4 bg-gray-200 rounded-md ${
-                message.user === "user" ? "bg-blue-500 text-white" : ""
-              }`}
+              className={`inline-block p-2 max-w-3/4 bg-gray-200 rounded-md ${message.user === "user" ? "bg-blue-500" : ""
+                }`}
             >
               {message.text}
             </span>
