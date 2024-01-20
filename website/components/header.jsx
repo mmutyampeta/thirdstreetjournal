@@ -27,13 +27,19 @@ const Header = ({ setSelectedPage }) => {
           <div className="hidden sm:ml-6 sm:block">
             <div className="flex space-x-4">
               <button
+                className="font-serif text-gray-300 font-bold hover:text-white"
                 onClick={() => {
                   setSelectedPage("home");
                 }}
               >
                 Home
               </button>
-              <button onClick={() => setSelectedPage("chat")}>Chat Bot</button>
+              <button
+                className="font-serif text-gray-300 font-bold hover:text-white"
+                onClick={() => setSelectedPage("chat")}
+              >
+                Chat
+              </button>
             </div>
           </div>
         </div>
