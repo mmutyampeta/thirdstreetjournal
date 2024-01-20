@@ -48,6 +48,10 @@ const Chatbot = () => {
               ? "flex-grow overflow-y-auto bg-gray-200 rounded-xl p-8 flex items-center justify-center"
               : "flex-grow overflow-y-auto bg-gray-200 rounded-xl p-8"
           }
+          style={{
+            overscrollBehaviorY: "contain", // Set overscroll behavior to 'contain'
+            scrollBehavior: "smooth", // Enable smooth scrolling
+          }}
         >
           <div className="">
             {count === -1 && (
@@ -97,8 +101,8 @@ const Chatbot = () => {
                 <span
                   className={`inline-block p-3 max-w-3/4 bg-blue-500 rounded-md ${
                     message.user === "user"
-                      ? "bg-blue-500 text-white"
-                      : "bg-white"
+                      ? "bg-gray-800 text-white"
+                      : "bg-white text-gray-800"
                   }`}
                 >
                   {message.text}
@@ -111,6 +115,11 @@ const Chatbot = () => {
           <input
             type="text"
             value={newMessage}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleSendMessage();
+              }
+            }}
             onChange={(e) => setNewMessage(e.target.value)}
             className="flex-grow p-2 border bg-transparent border-gray-800 rounded-md focus:outline-none"
             placeholder="Ask AI"
