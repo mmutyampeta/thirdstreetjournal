@@ -114,8 +114,6 @@ def getNews():
         print("HELLO")
         count = 1
         newsDict = []
-        print(type(newsArticles[0]))
-        print(type(newsArticles[0].metadata['title']))
         for i in newsArticles:
             temp = {}
             temp['title'] = i.metadata['title']

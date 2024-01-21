@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import NewsTile from "./newstile";
 
 const NewsPage = () => {
-  let [newsData, setNewsData] = useState({})
+  let [newsData, setNewsData] = useState([])
 
   const pullNews = async () => {
     try {
@@ -14,9 +14,7 @@ const NewsPage = () => {
         headers: {
           "Content-Type": "application/json",
         }
-      }).then((response) => {
-        setNewsData(JSON.parse(response.text))
-      });
+      })
 
       if (messageResponse.ok) {
         console.log("News information recieved successfully!");
