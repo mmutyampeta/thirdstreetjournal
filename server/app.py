@@ -45,6 +45,7 @@ def setup_chat():
 
     return response
 
-@app.route("/chatresponse", methods = ["GET"])
+@app.route("/message", methods = ["GET"])
 def message():
+    
     print("hello2")
