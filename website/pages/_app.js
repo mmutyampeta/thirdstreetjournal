@@ -41,7 +41,7 @@ function MyApp() {
       {selectedPage === "chat" && <Chatbot />}
       {selectedPage === "stocks" && <TradingViewWidget />}
 
-      <div className="">
+      <div>
         <Footer setSelectedPage={setSelectedPage} />
       </div>
     </>

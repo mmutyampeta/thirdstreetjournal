@@ -19,6 +19,8 @@ const Box = () => {
     };
 
     const handleSendMessage = async () => {
+        // clear the input field
+        setNewMessage("");
         if (newMessage.trim() === "") return;
 
         setCount(1);
@@ -29,22 +31,28 @@ const Box = () => {
             { text: newMessage, user: "user" },
         ]);
 
+        let botMessage = ""
+
+
+
         try {
             const url = (
-                "http://100.69.100.131:5050/message?" + new URLSearchParams({
+                "http://127.0.0.1:5050/message?" + new URLSearchParams({
                     query: newMessage
                 })
             )
-            const setupResponse = await fetch(url, {
+            const messageResponse = await fetch(url, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
                 }
             });
 
-            if (setupResponse.ok) {
+            if (messageResponse.ok) {
                 console.log("Response recieved from DB successfully!");
-                setRenderChatBox(true);
+                const responseBody = await messageResponse.json();
+                console.log(responseBody.text)
+                botMessage = responseBody.text;
                 // Handle success, e.g., navigate to the chat page
             } else {
                 console.error("DB response failed!");
@@ -59,11 +67,9 @@ const Box = () => {
         // Simulate bot response (replace with actual bot logic)
         setMessages((prevMessages) => [
             ...prevMessages,
-            { text: "Sell your fucking house!", user: "bot" },
+            { text: botMessage, user: "bot" },
         ]);
 
-        // Clear the input field
-        setNewMessage("");
     };
 
     const defaultSendMessage = (number) => {
