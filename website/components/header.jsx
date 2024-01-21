@@ -65,6 +65,16 @@ const Header = ({ setSelectedPage }) => {
               >
                 Home
               </button>
+
+              <button
+                className="font-serif text-gray-300 font-bold hover:text-white"
+                onClick={() => {
+                  setSelectedPage("about");
+                }}
+              >
+                About
+              </button>
+
               <button
                 className="font-serif text-gray-300 font-bold hover:text-white"
                 onClick={() => setSelectedPage("chat")}
