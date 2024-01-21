@@ -12,7 +12,7 @@ from newsapi import NewsApiClient
 
 openai.api_key = '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'
 pc = PineconeGRPC(api_key='ed95f018-c846-4cd6-b05a-d05b40a36cd8')
-index = pc.Index('myindex')
+index = pc.Index('thirdstreetjournal2')
 tokenizer = tiktoken.get_encoding('cl100k_base')
 batch_limit = 100
 
@@ -46,7 +46,10 @@ def cache_article(source_name: str, author: str, title: str, description: str,
         site_text = get_site_text(url)
     except Exception as e:
         print(e)
-        return
+        try:
+            site_text = get_site_text_scraperapi(url)
+        except:
+            return
     
     # site_text = site_text.encode('ascii', 'ignore')
     # site_text = ''.join([i if ord(i) < 128 else ' ' for i in site_text])
@@ -78,11 +81,16 @@ def cache_article(source_name: str, author: str, title: str, description: str,
 
     summary_text = summary_res.choices[0].message.content
     print(summary_text)
-    if summary_text.lower() == 'the website is jargon.':
+    if 'website is jargon' in summary_text.lower():
         try:  
             print('trying this')
             site_text = get_site_text_scraperapi(url)
             print(site_text)
+            prompt = 'Summarize this text dump from a website but don\'t mention in your response that you are summarizing a text dump. Be sure to include specific dates/times in your response. If the website is jargon, reply with "the website is jargon":\n""""{}"""'.format(site_text)
+            if len(tokenizer.encode(prompt)) > 16370:
+                prompt = prompt[:65540]
+                while len(tokenizer.encode(prompt)) > 16370:
+                    prompt = prompt[:-200]
             summary_res = openai.chat.completions.create(model='gpt-3.5-turbo-16k-0613',
                                             seed=2005,
                                             temperature=0,
@@ -92,17 +100,18 @@ def cache_article(source_name: str, author: str, title: str, description: str,
                                                 }]
                                             )
             summary_text = summary_res.choices[0].message.content
-            if summary_text == 'The website is jargon.':
+            if 'website is jargon' in summary_text.lower():
                 print(url)
                 return                                 #failed twice, so cut loss
         except Exception as e:
             print(e)
             return 
         
-        if len(site_text) < 1200:
-            print(url)
-            return              #failed twice, so cut loss
+        # if len(site_text) < 1200:
+        #     print(url)
+        #     return              #failed twice, so cut loss
     
+    print(url, summary_text)
     record_texts = text_splitter.split_text(summary_text)
     metadata = {
         'source_name': source_name,
@@ -165,8 +174,8 @@ query_topics = ['(finance OR investment OR banking OR fiscal)',
 
 
 for t in query_topics:
-    res = newsapi.get_everything(q='finance', sort_by='popularity', domains='cnbc.com,forbes.com,reuters.com,bbc.co.uk,nytimes.com')
-    entries = res['articles'][:100]
+    res = newsapi.get_everything(q='finance', to='2024-01-01', sort_by='popularity', domains='cnbc.com,forbes.com,reuters.com,bbc.co.uk,nytimes.com,businessinsider.com,cnn.com,nbcnews.com,npr.org,washingtonpost.com,theguardian.com,vox.com,apnews.com,time.com')
+    entries = res['articles'][:200]
     for i, entry in enumerate(entries):
         cache_article(entry['source']['name'] or 'Unknown', entry['author'] or 'Unknown', entry['title'] or 'Unknown', 
                     entry['description'] or 'Unknown', entry['url'] or 'Unknown', entry['urlToImage'] or 'Unknown', entry['publishedAt'] or 'Unknown'
