@@ -1,7 +1,8 @@
 from flask import Flask, jsonify, request
 import json
 from flask_cors import CORS
-from chat_test import setup, query
+# from chat_test import setup, query
+from agent_test import setup, query
 
 app = Flask(__name__)
 CORS(app)
@@ -28,6 +29,7 @@ def hello_world():
 
 @app.route("/setupchat", methods=["POST"])
 def setup_chat():
+    global bot
     # Perform setup actions here
     # You can add your logic for chat setup
     # For now, just returning a success response
@@ -36,7 +38,8 @@ def setup_chat():
     file.close()
 
     try:
-        bot = setup(keys["pinecone"], keys["openai"])
+        # bot = setup(keys["pinecone"], keys["openai"])
+        bot = setup()
         response = app.response_class(
             response=json.dumps({'status': 'success'}),
             status=200,
@@ -60,19 +63,34 @@ def setup_chat():
 def message():
     print(request)
     print(request.args.get("query"))
+    global bot
+
+    file = open('keys.json')
+    keys = json.load(file)
+    file.close()
 
     if bot == None:
         bot = setup(keys["pinecone"], keys["openai"])
     
-    testedresponse = query(request.args.get("query"))
+    chatResponse = query(request.args.get("query"), bot)
     count = 1
+    """
     for message in testedresponse["chat_history"]:
         if count % 2 == 0:
-            print(f"Output {1}: " + message)
+            print(f"Message {1}: " + message.content)
+            # print(f"Output {1}: " + str(message))
         count += 1
+    """
+
+    print("Output Message: " + chatResponse['chat_history'][-1].content)
+
+    chatMessage = chatResponse['chat_history'][-1].content
 
     response = app.response_class(
-        response=json.dumps({'status': 'success'}),
+        response=json.dumps({
+            'status': 'success',
+            'text': chatMessage
+        }),
         status=200,
         mimetype='application/json'
     )

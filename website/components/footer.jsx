@@ -50,7 +50,7 @@ const Footer = ({ setSelectedPage }) => {
                   setSelectedPage("about");
                 }}
                 href="#"
-                class="hover:underline"
+                className="hover:underline"
               >
                 About
               </a>
