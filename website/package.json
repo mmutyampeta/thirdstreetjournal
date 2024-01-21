@@ -9,15 +9,24 @@
     "@canvasjs/react-charts": "^1.0.0",
     "@headlessui/react": "^1.7.18",
     "@heroicons/react": "^2.1.1",
+    "@material-tailwind/react": "^2.1.8",
     "@syncfusion/ej2-react-charts": "^24.1.46",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
     "autoprefixer": "^10.4.17",
+    "bootstrap": "^5.3.2",
+    "flowbite-react": "^0.7.2",
     "jquery": "^3.7.1",
     "next": "latest",
+    "popper.js": "^1.16.1",
     "postcss": "^8.4.33",
     "react": "18.2.0",
+    "react-bootstrap": "^2.10.0",
     "react-dom": "18.2.0",
     "react-router-dom": "^6.21.3",
-    "tailwindcss": "^3.4.1"
+    "tailwindcss": "^3.4.1",
+    "tw-elements-react": "^1.0.0-alpha2"
   },
   "engines": {
     "node": ">=18"
