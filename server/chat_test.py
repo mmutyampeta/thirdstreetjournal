@@ -5,9 +5,13 @@ from langchain.memory import ConversationBufferMemory
 from langchain.prompts import PromptTemplate
 import pinecone
 
-def setup():
-    pineconeKey = 'ed95f018-c846-4cd6-b05a-d05b40a36cd8'
-    openAIkey = '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'
+def setup(pineKey, openKey):
+    #pineconeKey = 'ed95f018-c846-4cd6-b05a-d05b40a36cd8'
+    
+    #openAIkey = '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'
+
+    pineconeKey = pineKey
+    openAI = openKey
 
     pc = pinecone.Pinecone(api_key = pineconeKey)
     index = pc.Index('myindex')
@@ -53,13 +57,21 @@ def displayResults(result):
     for message in result['chat_history']:
         print(message.content)
 
+pineconeKey = 'ed95f018-c846-4cd6-b05a-d05b40a36cd8'
+openAIkey = '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'
+
+# tempbot = setup(pineconeKey, openAIkey)
+# query("what happened to elon musk", tempbot)
+# returned = query("when did this happen", tempbot)
+# displayResults(returned)
 
 
+"""
 result = bot.invoke({'question': 'what happened to elon musk'})
 result = bot.invoke({'question': 'when did this happen'})
 for m in result['chat_history']:
     print(m.content)
-
+"""
 
 
 
