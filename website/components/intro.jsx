@@ -10,10 +10,20 @@ export default function Intro({ setSelectedPage }) {
         <p className="text-center text-xl text-gray-800 font-serif tracking-wider leading-10 p-3">
           This is your one-stop shop for financial news! This application
           extensively scrapes the internet for the latest financial news across
-          the most reputable sources of news in the world. Through thorough AI
-          processing, we developed a chat feature to look into any information
-          that any analyst may want to research.
+          the most reputable sources of news in the world. You can read the
+          insights of financial experts with the convenience of having an AI
+          Expert by your side.
         </p>
+        <div className="flex items-center justify-center p-5 row-span-1">
+          <button
+            className="bg-gray-800 text-white hover:text-gray-800 hover:bg-white hover:border hover:border-gray-800 font-bold py-2 px-4 rounded-full"
+            onClick={() => setSelectedPage("home")}
+          >
+            <p className="text-2xl text-white-800 font-serif tracking-wider leading-10 p-1">
+              Read Today's News
+            </p>
+          </button>
+        </div>
       </div>
 
       <div className="bg-gray-800">
@@ -50,6 +60,19 @@ export default function Intro({ setSelectedPage }) {
             <img className="w-3/4" src="/Chatbot.png"></img>
           </div>
         </div>
+      </div>
+
+      <div className="border text-gray-800 p-8">
+        <h1 className="text-4xl text-gray-800 font-bold tracking-wider font-serif text-center mb-4">
+          Welcome to The Third Street Journal!
+        </h1>
+        <p className="text-center text-xl text-gray-800 font-serif tracking-wider leading-10 p-3">
+          This is your one-stop shop for financial news! This application
+          extensively scrapes the internet for the latest financial news across
+          the most reputable sources of news in the world. Through thorough AI
+          processing, we developed a chat feature to look into any information
+          that any analyst may want to research.
+        </p>
       </div>
     </>
   );
