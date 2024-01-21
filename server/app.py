@@ -1,15 +1,10 @@
 from flask import Flask, jsonify
 import json
-
-# chat bot requirements imports
-from langchain_community.vectorstores.pinecone import Pinecone
-from langchain_openai import OpenAIEmbeddings, ChatOpenAI
-from langchain.chains import RetrievalQA, ConversationalRetrievalChain
-from langchain.memory import ConversationBufferMemory
-from langchain.prompts import PromptTemplate
-import pinecone
+from flask_cors import CORS
+from chat_test import setup
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route("/", methods = ["GET"])
 def base():
@@ -28,3 +23,28 @@ def hello_world():
     except Exception as e:
         print(str(e))
         return jsonify({'error': str(e)}), 500
+
+
+@app.route("/setupchat", methods=["POST"])
+def setup_chat():
+    # Perform setup actions here
+    # You can add your logic for chat setup
+    # For now, just returning a success response
+    file = open('keys.json')
+    keys = json.load(file)
+    file.close()
+
+    setup(keys["pinecone"], keys["openai"])
+
+    response = app.response_class(
+        response=json.dumps({'status': 'success'}),
+        status=200,
+        mimetype='application/json'
+    )
+    response.headers.add('Access-Control-Allow-Origin', '*')
+
+    return response
+
+@app.route("/chatresponse", methods = ["GET"])
+def message():
+    print("hello2")
