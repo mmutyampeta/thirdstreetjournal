@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 const navigation = [
   { name: "Home", href: "/", current: true },
   { name: "Chat Bot", href: "/chat", current: false },
@@ -12,7 +10,6 @@ function classNames(...classes) {
 }
 
 const Header = ({ setSelectedPage }) => {
-
   /*
   const chatSetup = async ({ newPage }) => {
     setSelectedPage(newPage);
@@ -40,7 +37,6 @@ const Header = ({ setSelectedPage }) => {
 
   }
   */
-
 
   return (
     <>
@@ -71,8 +67,7 @@ const Header = ({ setSelectedPage }) => {
               </button>
               <button
                 className="font-serif text-gray-300 font-bold hover:text-white"
-                onClick={() =>
-                  setSelectedPage("chat")}
+                onClick={() => setSelectedPage("chat")}
               >
                 Chat
               </button>
