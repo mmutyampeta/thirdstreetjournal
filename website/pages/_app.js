@@ -6,6 +6,7 @@ import Intro from "../components/intro";
 import Chatbot from "../components/chatbot";
 import TradingViewWidget from "../components/chart";
 import Footer from "../components/footer";
+import Head from "next/head";
 
 const newsTiles = [
   {
@@ -54,6 +55,10 @@ function MyApp() {
   const [selectedPage, setSelectedPage] = useState("home");
   return (
     <>
+      <Head>
+        <title>Third Street Journal</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Header setSelectedPage={setSelectedPage} />
 
       {selectedPage === "home" && <NewsPage input={newsTiles} />}
@@ -61,7 +66,7 @@ function MyApp() {
       {selectedPage === "chat" && <Chatbot />}
       {selectedPage === "stocks" && <TradingViewWidget />}
 
-      <div>
+      <div className="">
         <Footer setSelectedPage={setSelectedPage} />
       </div>
     </>
