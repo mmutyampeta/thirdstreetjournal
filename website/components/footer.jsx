@@ -1,9 +1,9 @@
 const Footer = ({ setSelectedPage }) => {
   return (
     <>
-      <footer class="flex flex-col items-center bg-gray-800 text-center dark:bg-gray-800 lg:text-left">
-        <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
-          <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">
+      <footer className="flex flex-col items-center bg-gray-800 text-center dark:bg-gray-800 lg:text-left">
+        <div className="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
+          <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
             © 2023{" "}
             <a href="/" className="hover:underline">
               Third Street Journal™
@@ -17,7 +17,7 @@ const Footer = ({ setSelectedPage }) => {
                   setSelectedPage("home");
                 }}
                 href="#"
-                class="hover:underline me-4 md:me-6"
+                className="hover:underline me-4 md:me-6"
               >
                 Home
               </a>
@@ -28,7 +28,7 @@ const Footer = ({ setSelectedPage }) => {
                   setSelectedPage("chat");
                 }}
                 href="#"
-                class="hover:underline me-4 md:me-6"
+                className="hover:underline me-4 md:me-6"
               >
                 Chat
               </a>
@@ -39,7 +39,7 @@ const Footer = ({ setSelectedPage }) => {
                   setSelectedPage("stocks");
                 }}
                 href="#"
-                class="hover:underline me-4 md:me-6"
+                className="hover:underline me-4 md:me-6"
               >
                 Stocks
               </a>
