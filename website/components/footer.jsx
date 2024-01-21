@@ -2,14 +2,6 @@ const Footer = ({ setSelectedPage }) => {
   return (
     <>
       <footer class="flex flex-col items-center bg-gray-800 text-center dark:bg-gray-800 lg:text-left">
-        <div>
-          <p class="text-sm text-gray-500 sm:text-center dark:text-gray-400 pt-2">
-            All services are for informational purposes only and are not
-            intended to provide personal financial advice. There is an inherent
-            risk involved with financial decisions and Third Street Journal will
-            not be held liable for decisions others make.
-          </p>
-        </div>
         <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
           <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">
             © 2023{" "}

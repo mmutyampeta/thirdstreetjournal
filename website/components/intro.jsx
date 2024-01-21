@@ -64,14 +64,35 @@ export default function Intro({ setSelectedPage }) {
 
       <div className="border text-gray-800 p-8">
         <h1 className="text-4xl text-gray-800 font-bold tracking-wider font-serif text-center mb-4">
-          Welcome to The Third Street Journal!
+          Interactive Candlestick Visualization
         </h1>
         <p className="text-center text-xl text-gray-800 font-serif tracking-wider leading-10 p-3">
-          This is your one-stop shop for financial news! This application
-          extensively scrapes the internet for the latest financial news across
-          the most reputable sources of news in the world. Through thorough AI
-          processing, we developed a chat feature to look into any information
-          that any analyst may want to research.
+          Make informed decisions with a comprehensive analysis of market
+          trends. Our feature is a key component of our robust financial
+          analysis tool, providing you with the insights needed to navigate the
+          complexities of stock markets. Whether you're a day trader, swing
+          trader, or long-term investor, our Interactive Candlestick
+          Visualization feature is designed to empower your investment journey.
+          Stay ahead of the curve and make data-driven decisions with
+          confidence.
+        </p>
+        <div className="flex items-center justify-center p-5 row-span-1">
+          <button
+            className="bg-gray-800 text-white hover:text-gray-800 hover:bg-white hover:border hover:border-gray-800 font-bold py-2 px-4 rounded-full"
+            onClick={() => setSelectedPage("stocks")}
+          >
+            <p className="text-2xl text-white-800 font-serif tracking-wider leading-10 p-1">
+              Candlestick Visualization
+            </p>
+          </button>
+        </div>
+      </div>
+      <div>
+        <p class="text-sm text-gray-500 sm:text-center dark:text-gray-400 p-2">
+          All services are for informational purposes only and are not intended
+          to provide personal financial advice. There is an inherent risk
+          involved with financial decisions and Third Street Journal will not be
+          held liable for decisions others make.
         </p>
       </div>
     </>
