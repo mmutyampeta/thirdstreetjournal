@@ -68,15 +68,6 @@ const Header = ({ setSelectedPage }) => {
 
               <button
                 className="font-serif text-gray-300 font-bold hover:text-white"
-                onClick={() => {
-                  setSelectedPage("about");
-                }}
-              >
-                About
-              </button>
-
-              <button
-                className="font-serif text-gray-300 font-bold hover:text-white"
                 onClick={() => setSelectedPage("chat")}
               >
                 Chat
@@ -86,6 +77,14 @@ const Header = ({ setSelectedPage }) => {
                 onClick={() => setSelectedPage("stocks")}
               >
                 Stocks
+              </button>
+              <button
+                className="font-serif text-gray-300 font-bold hover:text-white"
+                onClick={() => {
+                  setSelectedPage("about");
+                }}
+              >
+                About
               </button>
             </div>
           </div>
