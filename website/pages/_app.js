@@ -11,6 +11,7 @@ function MyApp() {
       <Header setSelectedPage={setSelectedPage} />
       {selectedPage === "home" && <Intro setSelectedPage={setSelectedPage} />}
       {selectedPage === "chat" && <Chatbot />}
+      {selectedPage === "stocks"}
     </>
   );
 }
