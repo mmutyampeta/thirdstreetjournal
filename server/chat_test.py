@@ -47,7 +47,6 @@ def setup(pineKey, openKey):
                                                 return_source_documents=True,
                                                 combine_docs_chain_kwargs=chain_type_kwargs
                                                 )
-
     return bot
 
 def query(message, bot):

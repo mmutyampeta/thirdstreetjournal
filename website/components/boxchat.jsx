@@ -31,7 +31,7 @@ const Box = () => {
 
         try {
             const url = (
-                "http://127.0.0.1:5050/message?" + new URLSearchParams({
+                "http://100.69.100.131:5050/message?" + new URLSearchParams({
                     query: newMessage
                 })
             )
@@ -51,7 +51,7 @@ const Box = () => {
                 // Handle failure
             }
         } catch (error) {
-            console.error("Error during chat setup:", error);
+            console.error("Error occurred during messaging!:", error);
             // Handle error
         }
 
