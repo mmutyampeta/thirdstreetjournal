@@ -14,17 +14,18 @@ import requests
 import json
 import yfinance as yf
 from langchain.tools import tool
+from keys import getKey
 
-def newsPull(n, pineToken, openAItoken):
-    google_search_results_tool = GoogleSearchRun(api_wrapper=GoogleSearchAPIWrapper(google_api_key='AIzaSyAqhEWjl7yonml9xTD3GE0OClnNdRyWQJM',
-                                                                                google_cse_id='401842a4afba24456'))
-    google_finance_tool = GoogleFinanceQueryRun(api_wrapper=GoogleFinanceAPIWrapper(serp_search_engine='google_finance', serp_api_key='4737ac48553b764ce432562329e495e24cc8edcf627df19d924a58528fd8f661'))
+def newsPull(n):
+    # google_search_results_tool = GoogleSearchRun(api_wrapper=GoogleSearchAPIWrapper(google_api_key=getKey("keys.txt", "googlesearch"),
+                                                                                # google_cse_id='401842a4afba24456'))
+    # google_finance_tool = GoogleFinanceQueryRun(api_wrapper=GoogleFinanceAPIWrapper(serp_search_engine='google_finance', serp_api_key=getKey("keys.txt", "googlefinance")))
 
-    pc = Pinecone(api_key = pineToken)
+    pc = Pinecone(api_key = getKey("keys.txt", "pinecone"))
     index = pc.Index('myindex')
 
     embed = OpenAIEmbeddings(model='text-embedding-ada-002', 
-                            openai_api_key=openAItoken
+                            openai_api_key=getKey("keys.txt", "openai")
                             )
 
     vectorstore = LCPinecone(index, embed, 'text')
@@ -36,18 +37,18 @@ def setup():
                                                                                 google_cse_id='401842a4afba24456'))
     google_finance_tool = GoogleFinanceQueryRun(api_wrapper=GoogleFinanceAPIWrapper(serp_search_engine='google_finance', serp_api_key='4737ac48553b764ce432562329e495e24cc8edcf627df19d924a58528fd8f661'))
 
-    pc = Pinecone(api_key='ed95f018-c846-4cd6-b05a-d05b40a36cd8')
+    pc = Pinecone(api_key=getKey("keys.txt", "pinecone"))
     index = pc.Index('myindex')
 
     embed = OpenAIEmbeddings(model='text-embedding-ada-002', 
-                            openai_api_key='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'
+                            openai_api_key=getKey("keys.txt", "openai")
                             )
 
     vectorstore = LCPinecone(index, embed, 'text')
 
     # print(len(vectorstore.similarity_search('', k=999)))
 
-    llm = ChatOpenAI(model_name='gpt-3.5-turbo-1106', openai_api_key='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')
+    llm = ChatOpenAI(model_name='gpt-3.5-turbo-1106', openai_api_key=getKey("keys.txt", "openai"))
 
     memory = ConversationBufferMemory(memory_key='chat_history', 
                                     input_key='input', 

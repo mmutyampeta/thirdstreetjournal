@@ -72,7 +72,7 @@ def message():
     file.close()
 
     if bot == None:
-        bot = setup(keys["pinecone"], keys["openai"])
+        bot = setup()
     
     chatResponse = query(request.args.get("query"), bot)
     count = 1
@@ -103,11 +103,10 @@ def message():
 @app.route("/news", methods = ['GET'])
 def getNews():
     file = open('keys.json')
-    keys = json.load(file)
     file.close()
 
     try:
-        newsArticles = newsPull(60, keys["pinecone"], keys["openai"])
+        newsArticles = newsPull(60)
         titles = []
         for i in newsArticles:
             # print(i.metadata['title'])
