@@ -21,6 +21,10 @@ function TradingViewWidget() {
           "locale": "en",
           "enable_publishing": false,
           "allow_symbol_change": true,
+          "studies": [
+            "STD;MA%Ribbon",
+            "STD;RSI"
+          ],
           "support_host": "https://www.tradingview.com"
         }`;
     container.current.appendChild(script);
