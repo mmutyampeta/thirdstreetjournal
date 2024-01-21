@@ -29,7 +29,7 @@ def newsPull(n, pineToken, openAItoken):
 
     vectorstore = LCPinecone(index, embed, 'text')
 
-    return vectorstore.similarity_search('', k = n)
+    return vectorstore.similarity_search('finance', k = n)
 
 def setup():
     google_search_results_tool = GoogleSearchRun(api_wrapper=GoogleSearchAPIWrapper(google_api_key='AIzaSyAqhEWjl7yonml9xTD3GE0OClnNdRyWQJM',

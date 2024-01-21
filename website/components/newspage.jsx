@@ -23,7 +23,6 @@ const NewsPage = () => {
         console.log("News information recieved successfully!");
         const responseBody = await messageResponse.json();
         setNewsData(JSON.parse(responseBody.text));
-        console.log(newsData);
         // Handle success, e.g., navigate to the chat page
       } else {
         console.error("DB response failed!");

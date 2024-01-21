@@ -106,8 +106,19 @@ def getNews():
     file.close()
 
     try:
-        newsArticles = newsPull(40, keys["pinecone"], keys["openai"])
-        print(newsArticles)
+        newsArticles = newsPull(60, keys["pinecone"], keys["openai"])
+        titles = []
+        for i in newsArticles:
+            # print(i.metadata['title'])
+            titles.append(i.metadata['title'])
+        titles = list(set(titles))
+        print("here")
+        print(titles)
+        print("here")
+        # for i in titles:
+        #     print(repr(i))
+        #     print("test")
+
         print(type(newsArticles))
 
         # jsonNews = json.dumps(newsArticles) # won't work since newArticles is a list
@@ -115,10 +126,17 @@ def getNews():
         print("HELLO")
         count = 1
         newsDict = []
-        titles = []
+    
+        print("\n\n\n")
+        distinct = []
+        print(len(titles))
+
         for i in newsArticles:
             temp = {}
-            if i.metadata['title'] not in titles:
+            print(i.metadata['title'].strip())
+            if i.metadata['title'].strip() in titles and i.metadata['title'] not in distinct:
+                distinct.append(i.metadata['title'])
+                titles.remove(i.metadata['title'])
                 temp['title'] = i.metadata['title']
                 titles.append(i.metadata['title'])
                 temp['description'] = i.metadata['description']
@@ -129,8 +147,24 @@ def getNews():
                 newsDict.append(temp)
  
         print("TEST")
+        if titles == distinct:
+            print("\n\nworked\n\n")
+            for i in titles:
+                print(i)
+        print("\n\n\n")
+        for i in newsDict:
+            print(i["title"])
+        print(len(newsDict))
+        finalList = []
 
-        newsDict = random.choices(newsDict, k = 8)
+        for i in range(0,8):
+            x = random.choice(newsDict)
+            if x not in finalList:
+                finalList.append(x)
+                newsDict.remove(x)
+        
+        newsDict = finalList
+    
 
         jsonNews = json.dumps(newsDict)
 
@@ -145,7 +179,8 @@ def getNews():
         print("News Retrieval SUCCESS")
     except Exception as e:
         print(e)
-
+        import traceback
+        traceback.print_exc()
         response = app.response_class(
             response=json.dumps({'status': 'failure'}),
             status=500,
