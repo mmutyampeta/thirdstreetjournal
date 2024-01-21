@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
 const defaultPrompts = [
-    { prompt: "Find relevant news articles" },
-    { prompt: "Look up XYZ Stock" },
-    { prompt: "Find relevant news articles" },
-    { prompt: "Find relevant news articles" },
+    { prompt: "Should I invest in Apple stock?" },
+    { prompt: "Summarize the GOOG stock" },
+    { prompt: "What is a financial derivative?" },
+    { prompt: "What does bid-ask spread mean?" },
 ];
 
 const Box = () => {
