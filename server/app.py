@@ -1,10 +1,11 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 import json
 from flask_cors import CORS
-from chat_test import setup
+from chat_test import setup, query
 
 app = Flask(__name__)
 CORS(app)
+bot = None
 
 @app.route("/", methods = ["GET"])
 def base():
@@ -34,7 +35,41 @@ def setup_chat():
     keys = json.load(file)
     file.close()
 
-    setup(keys["pinecone"], keys["openai"])
+    try:
+        bot = setup(keys["pinecone"], keys["openai"])
+        response = app.response_class(
+            response=json.dumps({'status': 'success'}),
+            status=200,
+            mimetype='application/json'
+        )
+        print("SETUP SUCCESS")
+    except Exception as e:
+        print(e)
+
+        response = app.response_class(
+            response=json.dumps({'status': 'failure'}),
+            status=500,
+            mimetype='application/json'
+        )
+    
+    response.headers.add('Access-Control-Allow-Origin', '*')
+
+    return response
+
+@app.route("/message", methods = ["GET"])
+def message():
+    print(request)
+    print(request.args.get("query"))
+
+    if bot == None:
+        bot = setup(keys["pinecone"], keys["openai"])
+    
+    testedresponse = query(request.args.get("query"))
+    count = 1
+    for message in testedresponse["chat_history"]:
+        if count % 2 == 0:
+            print(f"Output {1}: " + message)
+        count += 1
 
     response = app.response_class(
         response=json.dumps({'status': 'success'}),
@@ -43,9 +78,4 @@ def setup_chat():
     )
     response.headers.add('Access-Control-Allow-Origin', '*')
 
-    return response
-
-@app.route("/message", methods = ["GET"])
-def message():
-    
-    print("hello2")
+    return response 

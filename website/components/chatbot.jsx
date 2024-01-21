@@ -6,7 +6,7 @@ const Chatbot = () => {
 
   const chatSetup = async () => {
     try {
-      const setupResponse = await fetch("http://127.0.0.1:5050/setupchat", {
+      const setupResponse = await fetch("http://100.69.100.131:5050/setupchat", {
         method: "POST", // Change the method to POST
         headers: {
           "Content-Type": "application/json",
