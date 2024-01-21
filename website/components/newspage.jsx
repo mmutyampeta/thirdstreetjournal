@@ -119,7 +119,7 @@ const NewsPage = () => {
                               </Dialog.Title>
                               <div className="mt-2">
                                 <p className="text-sm text-gray-500">
-                                  {newsData[popUpIndex].description}
+                                  {newsData[popUpIndex].summary}
                                 </p>
                               </div>
                             </div>
