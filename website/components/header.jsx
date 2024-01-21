@@ -17,9 +17,14 @@ const Header = ({ setSelectedPage }) => {
       <div className="bg-gray-800 text-white p-4">
         <header className="bg-gray-800 text-white p-4 flex items-center justify-center">
           <div className="container mx-auto flex items-center justify-center">
-            <h1 className="text-4xl font-bold font-serif">
+            <button
+              onClick={() => {
+                setSelectedPage("home");
+              }}
+              className="text-4xl font-bold font-serif"
+            >
               THIRD STREET JOURNAL
-            </h1>
+            </button>
           </div>
         </header>
 
@@ -39,6 +44,12 @@ const Header = ({ setSelectedPage }) => {
                 onClick={() => setSelectedPage("chat")}
               >
                 Chat
+              </button>
+              <button
+                className="font-serif text-gray-300 font-bold hover:text-white"
+                onClick={() => setSelectedPage("stocks")}
+              >
+                Stocks
               </button>
             </div>
           </div>
