@@ -3,7 +3,7 @@ import React from "react";
 export default function NewsTile({ input }) {
   return (
     <>
-      <div className="container p-3 mx-auto bg-gray-800 text-white flex text-gray-800 p-5 border border-gray-800 grid grid-rows-4 gap-2 grid-flow-col">
+      <div className="container p-3 mx-auto flex text-gray-800 p-5 rounded-xl border border-gray-800 grid grid-rows-4 gap-2 grid-flow-col">
         <h1 className="text-2xl text-center font-bold font-serif row-span-1">
           {input.title}
         </h1>

@@ -6,11 +6,6 @@ import Intro from "../components/intro";
 import Chatbot from "../components/chatbot";
 import TradingViewWidget from "../components/chart";
 import Footer from "../components/footer";
-import Trial from "../components/trial";
-import "bootstrap/dist/css/bootstrap.min.css";
-import $ from "jquery";
-import Popper from "popper.js";
-import "bootstrap/dist/js/bootstrap.bundle.min";
 
 const newsTiles = [
   {
