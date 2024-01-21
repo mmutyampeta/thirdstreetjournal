@@ -1,8 +1,8 @@
 from flask import Flask, jsonify, request
 import json
 from flask_cors import CORS
-# from chat_test import setup, query
-from agent_test import setup, query
+# from chat_test import setup, query -> chat_test was the initial script.  After updating our database heavily, we came to agent_test
+from agent_test import setup, query, newsPull
 
 app = Flask(__name__)
 CORS(app)
@@ -94,6 +94,56 @@ def message():
         status=200,
         mimetype='application/json'
     )
+    response.headers.add('Access-Control-Allow-Origin', '*')
+
+    return response 
+
+@app.route("/news", methods = ['GET'])
+def getNews():
+    file = open('keys.json')
+    keys = json.load(file)
+    file.close()
+
+    try:
+        newsArticles = newsPull(10, keys["pinecone"], keys["openai"])
+        print(newsArticles)
+        print(type(newsArticles))
+
+        # jsonNews = json.dumps(newsArticles) # won't work since newArticles is a list
+
+        print("HELLO")
+        count = 1
+        newsDict = []
+        print(type(newsArticles[0]))
+        print(type(newsArticles[0].metadata['title']))
+        for i in newsArticles:
+            temp = {}
+            temp['title'] = i.metadata['title']
+            temp['description'] = i.metadata['description']
+            temp['url'] = i.metadata['url']
+            newsDict.append(temp)
+ 
+        print("TEST")
+        jsonNews = json.dumps(newsDict)
+
+        print(type(jsonNews))
+        response = app.response_class(
+            response=json.dumps({
+                'status': 'success',
+                'text': jsonNews}),
+            status=200,
+            mimetype='application/json'
+        )
+        print("News Retrieval SUCCESS")
+    except Exception as e:
+        print(e)
+
+        response = app.response_class(
+            response=json.dumps({'status': 'failure'}),
+            status=500,
+            mimetype='application/json'
+        )
+    
     response.headers.add('Access-Control-Allow-Origin', '*')
 
     return response 

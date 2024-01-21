@@ -15,6 +15,22 @@ import json
 import yfinance as yf
 from langchain.tools import tool
 
+def newsPull(n, pineToken, openAItoken):
+    google_search_results_tool = GoogleSearchRun(api_wrapper=GoogleSearchAPIWrapper(google_api_key='AIzaSyAqhEWjl7yonml9xTD3GE0OClnNdRyWQJM',
+                                                                                google_cse_id='401842a4afba24456'))
+    google_finance_tool = GoogleFinanceQueryRun(api_wrapper=GoogleFinanceAPIWrapper(serp_search_engine='google_finance', serp_api_key='4737ac48553b764ce432562329e495e24cc8edcf627df19d924a58528fd8f661'))
+
+    pc = Pinecone(api_key = pineToken)
+    index = pc.Index('myindex')
+
+    embed = OpenAIEmbeddings(model='text-embedding-ada-002', 
+                            openai_api_key=openAItoken
+                            )
+
+    vectorstore = LCPinecone(index, embed, 'text')
+
+    return vectorstore.similarity_search('', k = n)
+
 def setup():
     google_search_results_tool = GoogleSearchRun(api_wrapper=GoogleSearchAPIWrapper(google_api_key='AIzaSyAqhEWjl7yonml9xTD3GE0OClnNdRyWQJM',
                                                                                 google_cse_id='401842a4afba24456'))
