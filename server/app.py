@@ -119,6 +119,7 @@ def getNews():
             temp['title'] = i.metadata['title']
             temp['description'] = i.metadata['description']
             temp['url'] = i.metadata['url']
+            temp['summary'] = i.page_content
             newsDict.append(temp)
  
         print("TEST")
