@@ -120,6 +120,8 @@ def getNews():
             temp['description'] = i.metadata['description']
             temp['url'] = i.metadata['url']
             temp['summary'] = i.page_content
+            temp['date'] = i.metadata['publishedAt'][:10]
+            temp['source'] = i.metadata['source_name']
             newsDict.append(temp)
  
         print("TEST")
