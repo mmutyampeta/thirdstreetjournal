@@ -3,6 +3,7 @@ import json
 from flask_cors import CORS
 # from chat_test import setup, query -> chat_test was the initial script.  After updating our database heavily, we came to agent_test
 from agent_test import setup, query, newsPull
+from keys import getAllKeys, getKey
 import random 
 
 app = Flask(__name__)
