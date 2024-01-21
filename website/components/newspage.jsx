@@ -59,7 +59,7 @@ const NewsPage = () => {
             Explore today's financial headlines at Third Street Journal
           </p>
         </div>
-        <div className="grid grid-cols-2 gap-10 mt-10">
+        <div className="grid grid-cols-2 gap-10 mt-10 pb-5">
           {newsData.map((item, index) => (
             <button
               key={index}
