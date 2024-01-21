@@ -3,6 +3,7 @@ import json
 from flask_cors import CORS
 # from chat_test import setup, query -> chat_test was the initial script.  After updating our database heavily, we came to agent_test
 from agent_test import setup, query, newsPull
+import random 
 
 app = Flask(__name__)
 CORS(app)
@@ -105,7 +106,7 @@ def getNews():
     file.close()
 
     try:
-        newsArticles = newsPull(10, keys["pinecone"], keys["openai"])
+        newsArticles = newsPull(40, keys["pinecone"], keys["openai"])
         print(newsArticles)
         print(type(newsArticles))
 
@@ -114,17 +115,23 @@ def getNews():
         print("HELLO")
         count = 1
         newsDict = []
+        titles = []
         for i in newsArticles:
             temp = {}
-            temp['title'] = i.metadata['title']
-            temp['description'] = i.metadata['description']
-            temp['url'] = i.metadata['url']
-            temp['summary'] = i.page_content
-            temp['date'] = i.metadata['publishedAt'][:10]
-            temp['source'] = i.metadata['source_name']
-            newsDict.append(temp)
+            if i.metadata['title'] not in titles:
+                temp['title'] = i.metadata['title']
+                titles.append(i.metadata['title'])
+                temp['description'] = i.metadata['description']
+                temp['url'] = i.metadata['url']
+                temp['summary'] = i.page_content
+                temp['date'] = i.metadata['publishedAt'][:10]
+                temp['source'] = i.metadata['source_name']
+                newsDict.append(temp)
  
         print("TEST")
+
+        newsDict = random.choices(newsDict, k = 8)
+
         jsonNews = json.dumps(newsDict)
 
         print(type(jsonNews))
