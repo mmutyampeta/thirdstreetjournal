@@ -4,7 +4,7 @@ from flask_cors import CORS
 # from chat_test import setup, query -> chat_test was the initial script.  After updating our database heavily, we came to agent_test
 from agent_test import setup, query, newsPull
 from keys import getAllKeys, getKey
-import random 
+import random
 
 app = Flask(__name__)
 CORS(app)
@@ -56,7 +56,7 @@ def setup_chat():
             status=500,
             mimetype='application/json'
         )
-    
+
     response.headers.add('Access-Control-Allow-Origin', '*')
 
     return response
@@ -73,7 +73,7 @@ def message():
 
     if bot == None:
         bot = setup()
-    
+
     chatResponse = query(request.args.get("query"), bot)
     count = 1
     """
@@ -98,7 +98,7 @@ def message():
     )
     response.headers.add('Access-Control-Allow-Origin', '*')
 
-    return response 
+    return response
 
 @app.route("/news", methods = ['GET'])
 def getNews():
@@ -126,7 +126,7 @@ def getNews():
         print("HELLO")
         count = 1
         newsDict = []
-    
+
         print("\n\n\n")
         distinct = []
         print(len(titles))
@@ -145,7 +145,7 @@ def getNews():
                 temp['date'] = i.metadata['publishedAt'][:10]
                 temp['source'] = i.metadata['source_name']
                 newsDict.append(temp)
- 
+
         print("TEST")
         if titles == distinct:
             print("\n\nworked\n\n")
@@ -162,9 +162,9 @@ def getNews():
             if x not in finalList:
                 finalList.append(x)
                 newsDict.remove(x)
-        
+
         newsDict = finalList
-    
+
 
         jsonNews = json.dumps(newsDict)
 
@@ -186,7 +186,7 @@ def getNews():
             status=500,
             mimetype='application/json'
         )
-    
+
     response.headers.add('Access-Control-Allow-Origin', '*')
 
-    return response 
+    return response

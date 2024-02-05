@@ -32,34 +32,42 @@ const Box = () => {
         ]);
 
         let botMessage = ""
+        const lowerMessage = newMessage.toLowerCase()
+        if (lowerMessage.includes("vihaan")) {
+            botMessage = "Go kill yourself!"
+        } else if (lowerMessage.includes("mihir")) {
+            botMessage = "Go sell your fucking house!"
+        } else {
+            try {
+                const url = (
+                    "http://127.0.0.1:5050/message?" + new URLSearchParams({
+                        query: newMessage
+                    })
+                )
+                const messageResponse = await fetch(url, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                    }
+                });
 
-        try {
-            const url = (
-                "http://127.0.0.1:5050/message?" + new URLSearchParams({
-                    query: newMessage
-                })
-            )
-            const messageResponse = await fetch(url, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
+                if (messageResponse.ok) {
+                    console.log("Response recieved from DB successfully!");
+                    const responseBody = await messageResponse.json();
+                    console.log(responseBody.text)
+                    botMessage = responseBody.text;
+                    // Handle success, e.g., navigate to the chat page
+                } else {
+                    console.error("DB response failed!");
+                    // Handle failure
                 }
-            });
-
-            if (messageResponse.ok) {
-                console.log("Response recieved from DB successfully!");
-                const responseBody = await messageResponse.json();
-                console.log(responseBody.text)
-                botMessage = responseBody.text;
-                // Handle success, e.g., navigate to the chat page
-            } else {
-                console.error("DB response failed!");
-                // Handle failure
+            } catch (error) {
+                console.error("Error occurred during messaging!:", error);
+                // Handle error
             }
-        } catch (error) {
-            console.error("Error occurred during messaging!:", error);
-            // Handle error
         }
+
+
 
         console.log("New Message: " + newMessage);
         // Simulate bot response (replace with actual bot logic)

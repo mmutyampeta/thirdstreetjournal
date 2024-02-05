@@ -97,7 +97,7 @@ def setup():
             'sector': sector,
             'industry': industry,
             'country': country or 'US',
-            'exchange': exchange,
+            'exchange': exchange or "NASDAQ",
             'limit': limit or 1
         }
 
@@ -110,7 +110,7 @@ def setup():
 
     tools = [stock_screener, vectorstore_tool, stock_data, google_search_results_tool]
     agent = create_openai_functions_agent(llm, tools, functions_prompt)
-    agent_executor = AgentExecutor(agent=agent, tools=tools, memory=memory, handle_parsing_errors='Sorry, I did not understand your message. Please try again with a different wording.', verbose=False)
+    agent_executor = AgentExecutor(agent=agent, verbose = True, tools=tools, memory=memory, handle_parsing_errors='Sorry, I did not understand your message. Please try again with a different wording.')
 
     return agent_executor
 
